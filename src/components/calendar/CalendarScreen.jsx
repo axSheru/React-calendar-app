@@ -9,7 +9,7 @@ import { messages } from '../../helpers/calendar-messages-es';
 import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
 import { uiOpenModal } from '../../actions/ui';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { eventSetActive } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
 
@@ -17,21 +17,11 @@ moment.locale( 'es-mx' );
 
 const localizer = momentLocalizer( moment );
 
-const events = [{
-    title: 'Cumpleaños del jefe',
-    start: moment().toDate(),
-    end: moment().add( 2, 'hours' ).toDate(),
-    bgcolor: '#fafafa',
-    notes: 'Comprar el pastel',
-    user: {
-        _id: '123',
-        name: 'Alex'
-    }
-}];
-
 export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
+    // TODO: Leer los eventos del store. Usar useSelect().
+    const { events } = useSelector( state => state.event );
 
     const [lastView, setLastView] = useState( localStorage.getItem( 'lastView' ) || 'month' );
 
