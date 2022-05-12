@@ -122,7 +122,7 @@ export const CalendarModal = () => {
                     <label>Fecha y hora inicio</label>
                     <DateTimePicker
                         onChange={ handleStartDateChange }
-                        value={ startDate }
+                        value={ start }
                         className='form-control'
                     />
                 </div>
@@ -131,7 +131,7 @@ export const CalendarModal = () => {
                     <label>Fecha y hora fin</label>
                     <DateTimePicker
                         onChange={ handleEndDateChange }
-                        value={ endDate }
+                        value={ end }
                         minDate={ startDate }
                         className='form-control'
                     />
