@@ -50,7 +50,7 @@ export const CalendarModal = () => {
     const { notes, title, start, end } = formValues;
 
     useEffect(() => {
-        if ( activeEvent ) setFormValues( activeEvent );
+        ( activeEvent ) ? setFormValues( activeEvent ) : setFormValues( initEvent );
 
     }, [ activeEvent, setFormValues ]);
     
@@ -108,7 +108,7 @@ export const CalendarModal = () => {
                     name: 'Alex'
                 }
             }) );
-            
+
         }
 
         setTitleValid( true );
