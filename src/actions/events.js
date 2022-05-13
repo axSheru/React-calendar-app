@@ -15,6 +15,6 @@ export const eventClearActiveEvent = () => ({
 });
 
 export const eventUpdated = ( event ) => ({
-    type: types.eventUpdate,
+    type: types.eventUpdated,
     payload: event
 });

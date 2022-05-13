@@ -44,7 +44,7 @@ export const eventReducer = ( state = initialState, action ) => {
                 ]
             };
 
-        case types.eventUpdate:
+        case types.eventUpdated:
             return {
                 ...state,
                 events: state.events.map(
