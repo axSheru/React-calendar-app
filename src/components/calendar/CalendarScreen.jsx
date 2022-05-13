@@ -12,6 +12,7 @@ import { uiOpenModal } from '../../actions/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { eventSetActive } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
+import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 moment.locale( 'es-mx' );
 
@@ -21,7 +22,7 @@ export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
     // TODO: Leer los eventos del store. Usar useSelect().
-    const { events } = useSelector( state => state.event );
+    const { events, activeEvent } = useSelector( state => state.event );
 
     const [lastView, setLastView] = useState( localStorage.getItem( 'lastView' ) || 'month' );
 
@@ -71,6 +72,9 @@ export const CalendarScreen = () => {
                 }}
             />
             <AddNewFab />
+            {
+                ( activeEvent ) && <DeleteEventFab />
+            }
             <CalendarModal />
         </div>
     );
