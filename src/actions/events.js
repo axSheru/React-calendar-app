@@ -53,3 +53,25 @@ export const eventUpdated = ( event ) => ({
 export const eventDeleted = () => ({
     type: types.eventDeleted
 });
+
+export const eventsStartLoading = () => {
+    return async ( dispatch ) => {
+
+        try {
+
+            const resp = await fetchConToken( 'events' );
+            const body = await resp.json();
+
+            dispatch( eventsLoaded( body.eventos ) );
+
+        } catch (error) {
+            console.log( error );
+        }
+
+    };
+};
+
+const eventsLoaded = ( events ) => ({
+    type: types.eventLoaded,
+    payload: events
+});
