@@ -1,21 +1,22 @@
-import moment from 'moment';
 import { types } from '../types/types';
 
+// Ejemplo de la estructura de un evento.
+/* {
+    id: new Date().getTime(),
+    title: 'Cumpleaños del jefe',
+    start: moment().toDate(),
+    end: moment().add( 2, 'hours' ).toDate(),
+    bgcolor: '#fafafa',
+    notes: 'Comprar el pastel',
+    user: {
+        _id: '123',
+        name: 'Alex'
+    }
+} */
+
+
 const initialState = {
-    events: [
-        {
-            id: new Date().getTime(),
-            title: 'Cumpleaños del jefe',
-            start: moment().toDate(),
-            end: moment().add( 2, 'hours' ).toDate(),
-            bgcolor: '#fafafa',
-            notes: 'Comprar el pastel',
-            user: {
-                _id: '123',
-                name: 'Alex'
-            }
-        }
-    ],
+    events: [],
     activeEvent: null
 };
 
@@ -59,6 +60,12 @@ export const eventReducer = ( state = initialState, action ) => {
                     e => ( e.id !== state.activeEvent.id )
                 ),
                 activeEvent: null
+            };
+
+        case types.eventLoaded:
+            return {
+                ...state,
+                events: [ ...action.payload ]
             };
     
         default:
