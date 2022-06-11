@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import { fetchConToken } from "../helpers/fetch";
+import { prepareEvents } from "../helpers/prepareEvents";
 import { types } from "../types/types";
 
 export const startEventAddNew = ( event ) => {
@@ -62,7 +63,8 @@ export const eventsStartLoading = () => {
             const resp = await fetchConToken( 'events' );
             const body = await resp.json();
 
-            dispatch( eventsLoaded( body.eventos ) );
+            const events = prepareEvents( body.eventos );
+            dispatch( eventsLoaded( events ) );
 
         } catch (error) {
             console.log( error );
