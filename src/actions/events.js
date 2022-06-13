@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { fetchConToken } from "../helpers/fetch";
 import { prepareEvents } from "../helpers/prepareEvents";
@@ -72,7 +73,28 @@ const eventUpdated = ( event ) => ({
     payload: event
 });
 
-export const eventDeleted = () => ({
+export const eventStartDelete = ( event ) => {
+    return async ( dispatch ) => {
+
+        try {
+
+            const resp = await fetchConToken( `events/${ event.id }`, event, 'DELETE' );
+            const body = await resp.json();
+
+            if ( body.ok ) {
+                dispatch( eventDeleted );
+            } else {
+                Swal.fire( 'Error', body.msg, 'error' );
+            }
+            
+        } catch (error) {
+            console.log( error );
+        }
+
+    };
+};
+
+const eventDeleted = () => ({
     type: types.eventDeleted
 });
 
